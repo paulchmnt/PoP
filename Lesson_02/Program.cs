@@ -38,6 +38,7 @@ namespace Lesson_02
             // 10.
             Homework10();
 
+
             Console.ReadKey();
         }
 
