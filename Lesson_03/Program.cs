@@ -7,14 +7,20 @@ namespace Lesson_03
         static void Main(string[] args)
         {
             // TASKS
-            //Triangles(); // Task 1
-            //Numbers(); // Task 2
-            //NumbersBis();
-            //SportSelector(); // Task 3
-            //Greeting(); // Task 4
+            Triangles(); // Task 1
+            Console.WriteLine();
+            Numbers(); // Task 2
+            Console.WriteLine();
+            NumbersBis();
+            Console.WriteLine();
+            SportSelector(); // Task 3
+            Console.WriteLine();
+            Greeting(); // Task 4
+            Console.WriteLine();
 
             // HOMEWORK
             FormValidation(); // Task 5
+            Console.WriteLine();
 
 
             Console.ReadKey();
@@ -185,9 +191,9 @@ namespace Lesson_03
         {
             Console.WriteLine("You will enter some information to complete your form:");
 
-            string firstName, lastName, studentNumber; DateTime dateOfBirth = new DateTime(); 
-
-
+            string firstName, lastName, studentNumber; DateTime dateOfBirth; int year = 0; int month = 0;  int day = 0;
+            
+            // FIRST NAME
             bool check = false;
             do
             {
@@ -199,24 +205,173 @@ namespace Lesson_03
                     Console.WriteLine("\nError! Your first name is above 100 characters.");
             } while (check == false);
 
-
+            // LAST NAME
             check = false;
             do
             {
                 Console.Write("Please enter your last name > ");
-                firstName = Console.ReadLine();
-                if (firstName.Length <= 100)
+                lastName = Console.ReadLine();
+                if (lastName.Length <= 100)
                     check = true;
                 else
                     Console.WriteLine("\nError! Your last name is above 100 characters.");
             } while (check == false);
 
-
-            check = false;
+            // DATE OF BIRTH
+            check = false; bool check2 = false;
             do
             {
-                
+                // YEAR
+                do
+                {
+                    Console.Write("Please enter your year of birth > ");
+                    try
+                    {
+                        year = int.Parse(Console.ReadLine());
+                        check2 = true;
+                    }
+                    catch { Console.WriteLine("Error! It's not a year"); }
+                } while (check2 == false);
+
+                // MONTH
+                check2 = false;
+                do
+                {
+                    Console.Write("Please enter your month of birth (number) > ");
+                    try
+                    {
+                        month = int.Parse(Console.ReadLine());
+                        check2 = true;
+                    }
+                    catch { Console.WriteLine("Error! It's not a month"); }
+                } while (check2 == false);
+
+                // DAY
+                check2 = false;
+                do
+                {
+                    Console.Write("Please enter your day of birth > ");
+                    try
+                    {
+                        day = int.Parse(Console.ReadLine());
+                        check2 = true;
+                    }
+                    catch { Console.WriteLine("Error! It's not a day"); }
+                } while (check2 == false);
+
+                // COMPARE
+                dateOfBirth = new DateTime(year, month, day);
+                int res = DateTime.Compare(dateOfBirth, DateTime.Today.AddYears(-100)); // if <0, then dateOfBirth not okay
+                int res2 = DateTime.Compare(dateOfBirth, DateTime.Today); // if >0, then datOfBirht not okay
+                if (res >= 0 && res2 <= 0)
+                    check = true;
+                else
+                    Console.WriteLine("Error! You're more than 100 years old or you can't be born already");
+
             } while (check == false);
+            
+            // STUDENT NUMBER
+            check = check2 = false;
+            do
+            {
+                Console.WriteLine("You will enter your student number:");
+                string codeFac = null; string codeSpe = null; string noSpe = null;
+
+                // YEAR
+                do
+                {
+                    Console.Write("Please enter your year of entrance at the university > ");
+                    try
+                    {
+                        year = int.Parse(Console.ReadLine());
+                        if (year >= DateTime.Today.AddYears(-10).Year && year <= DateTime.Today.Year) // Check if it's a valid year
+                            check2 = true;
+                        else
+                            Console.WriteLine("Error! It's not an enable year");
+                    }
+                    catch { Console.WriteLine("Error! It's not a year"); }
+                } while (check2 == false);
+
+                // FACULTY CODE
+                check2 = false;
+                do
+                {
+                    Console.Write("Please enter your code of faculty (1 to 9) > ");
+                    try
+                    {
+                        int codeFacInt = int.Parse(Console.ReadLine());
+                        if (codeFacInt < 10 && codeFacInt > 0) // Check if it's a valid code
+                        {
+                            codeFac = "0" + codeFacInt;
+                            check2 = true;
+                        }
+                        else
+                            Console.WriteLine("Error! It's not an enable code of faculty");
+                    }
+                    catch { Console.WriteLine("Error! It's not a code of faculty"); }
+                } while (check2 == false);
+
+                // SPECIALITY CODE
+                check2 = false;
+                do
+                {
+                    Console.Write("Please enter your code of speciality (1 to 5) > ");
+                    try
+                    {
+                        int codeSpeInt = int.Parse(Console.ReadLine());
+                        if (codeSpeInt <= 5 && codeSpeInt > 0) // Check if it's a valid code
+                        {
+                            codeSpe = "0" + codeSpeInt;
+                            check2 = true;
+                        }
+                        else
+                            Console.WriteLine("Error! It's not an enable code of speciality");
+                    }
+                    catch { Console.WriteLine("Error! It's not a code of speciality"); }
+                } while (check2 == false);
+
+                // WITHIN SPECIALITY
+                check2 = false;
+                do
+                {
+                    Console.Write("Please enter the last four numbers within speciality > ");
+                    try
+                    {
+                        int noSpeInt = int.Parse(Console.ReadLine());
+                        if (noSpeInt < 10000 && noSpeInt >= 0) // Check if it's a valid number
+                        {
+                            noSpe = CodeWithinSpeciality(noSpeInt);
+                            check2 = true;
+                        }
+                        else
+                            Console.WriteLine("Error! It's not an enable number");
+                    }
+                    catch { Console.WriteLine("Error! It's not a number"); }
+                } while (check2 == false);
+
+                // Entire student number
+                studentNumber = year + codeFac + codeSpe + noSpe;
+                if (studentNumber.Length == 12)
+                    check = true;
+                else
+                    Console.WriteLine("Your student number hasn't the correct format");
+            } while (check == false);
+
+            // Message provided at the end
+            Console.WriteLine($"Hi {firstName} {lastName} ({studentNumber}), born on the {dateOfBirth.ToShortDateString()} " +
+                $"your form is now completed!");
+        }
+
+        static string CodeWithinSpeciality(int code)
+        {
+            if (code < 10)
+                return "000" + code;
+            else if (code < 100)
+                return "00" + code;
+            else if (code < 1000)
+                return "0" + code;
+            else
+                return code.ToString();
         }
     }
 }
