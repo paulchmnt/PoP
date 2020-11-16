@@ -9,7 +9,7 @@ namespace Lesson_08
     {
         static void Main(string[] args)
         {
-            /*
+            
             // Task 1
             StudentAndTeacherTest test1 = new StudentAndTeacherTest();
             test1.Main();
@@ -17,7 +17,7 @@ namespace Lesson_08
             // Task 2
             AlbumTest test2 = new AlbumTest();
             test2.Main();
-            */
+            
             // Task 3
             SquareTest test3 = new SquareTest();
             test3.Main();
