@@ -31,7 +31,7 @@ namespace Lesson_08.Task_03
             if (factor >= 0)
                 sideLength *= factor;
             else
-                throw new ArithmeticException("Error! The factor can't be less than 0.");
+                throw new ArgumentOutOfRangeException("Error! The factor can't be less than 0.");
         }
         public void ToString()
         {
