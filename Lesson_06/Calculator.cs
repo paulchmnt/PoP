@@ -14,9 +14,9 @@ namespace Lesson_06
         // Constructor
         public Calculator(float valA, float valB, string operation)
         {
-            this.valA = valA;
-            this.valB = valB;
-            this.operation = operation;
+            ValA = valA;
+            ValB = valB;
+            Operation = operation;
         }
 
 

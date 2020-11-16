@@ -9,7 +9,7 @@ namespace Lesson_06
         static void Main(string[] args)
         {
             // Task 1
-            Persons();
+            //Persons();
             Console.WriteLine();
 
             // Task 2
@@ -76,18 +76,20 @@ namespace Lesson_06
         {
             while (true)
             {
+                Console.Write("Value A > ");
+                float valA = float.Parse(Console.ReadLine());
+                Console.Write("Value B > ");
+                float valB = float.Parse(Console.ReadLine());
+                Console.Write("Operation > ");
+                string operation = Console.ReadLine();
+                
+
                 try
                 {
-                    Console.Write("Value A > ");
-                    float valA = float.Parse(Console.ReadLine());
-                    Console.Write("Value B > ");
-                    float valB = float.Parse(Console.ReadLine());
-                    Console.Write("Operation > ");
-                    string operation = Console.ReadLine();
-
                     Calculator calcul = new Calculator(valA, valB, operation);
                     calcul.ToCalculate();
                 }
+
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
