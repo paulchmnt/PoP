@@ -55,13 +55,13 @@ namespace Lesson_06
             switch (operation)
             {
                 case "+":
-                    calcResult = ValA + valB;
+                    calcResult = valA + valB;
                     break;
                 case "/":
                     if (valB == 0)
                         throw new DivideByZeroException("Value B cannot be 0!");
                     else
-                        calcResult = ValA / valB;
+                        calcResult = valA / valB;
                     break;
             }
             Console.WriteLine($"{valA} {operation} {valB} = {calcResult}");

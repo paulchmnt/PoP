@@ -7,7 +7,7 @@ namespace Lesson_07
         static void Main(string[] args)
         {
             
-
+            // SEE THE TEACHER GITHUB
             Console.ReadKey();
         }
     }

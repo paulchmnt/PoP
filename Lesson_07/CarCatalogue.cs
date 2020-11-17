@@ -28,7 +28,7 @@ namespace Lesson_07
             Console.WriteLine("Please enter a registration number:");
             string registrationNumber = Console.ReadLine();
             Console.Write("Please enter a make > ");
-            Make make = Console.ReadLine();
+            Make make = new Make();
         }
     }
 }
